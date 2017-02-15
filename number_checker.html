@@ -1,0 +1,99 @@
+<html>
+<head>
+<script language="javascript">
+    alert("Enter a character to check whether it is number or not");
+function numToString(x)
+{
+var r=0;
+var txter=x;
+var sizer=txter.length;
+var numStr="";
+    
+if(isNaN(txter))
+{
+alert(" Not a number");
+exit();
+}
+
+if(txter <0 || txter>999)
+{
+alert("Out of range");
+exit();
+}
+var n=parseInt(x);
+var places=0;
+var str="";
+var entry=0;
+while(n>=1)
+{
+r=parseInt(n%10);
+
+if(places<3 && entry==0)
+{
+numStr=txter.substring(txter.length-0,txter.length-3) // Checks for 1 to 999.
+str=onlyDigit(numStr); //Calls function for last 3 digits of the value.
+entry=1;
+}
+
+n=parseInt(n/10);
+places++;
+}
+alert(str);
+}
+
+
+function onlyDigit(n)
+{
+//Arrays to store the string equivalent of the number to convert in words
+var units=['','One','Two','Three','Four','Five','Six','Seven','Eight','Nine'];
+var randomer=['','Eleven','Twelve','Thirteen','Fourteen','Fifteen','Sixteen','Seventeen','Eighteen','Nineteen'];
+var tens=['','Ten','Twenty','Thirty','Forty','Fifty','Sixty','Seventy','Eighty','Ninety'];
+var r=0;
+var num=parseInt(n);
+var str="";
+var pl="";
+var tenser="";
+while(num>=1)
+{
+r=parseInt(num%10);
+tenser=r+tenser;
+if(tenser<=19 && tenser>10) //Logic for 10 to 19 numbers
+{
+str=randomer[tenser-10];
+}
+else
+{
+if(pl==0)        //If units place then call units array.
+{
+str=units[r];
+}
+else if(pl==1)    //If tens place then call tens array.
+{
+str=tens[r]+" "+str;
+}
+}
+if(pl==2)        //If hundreds place then call units array.
+{
+str=units[r]+" Hundred "+str;
+}
+
+num=parseInt(num/10);
+pl++;
+}
+return str;
+}
+
+</script>
+   
+
+<form name="fm" id="fm">
+
+<input type="text"  name="txtinput" id="txtinput" maxlength="9" />
+<input type="submit" onclick="numToString(txtinput.value)" id="show" />
+
+</form>
+    
+    </head>
+
+    
+</html>
